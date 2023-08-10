@@ -1,0 +1,80 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Gelir
+@{
+    ViewBag.Title = "Gelirgetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Gelir</a></li>
+                        <li class="breadcrumb-item active">Güncelle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Gelir Güncelle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Gelir" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Gelir  Güncelleme</h4>
+                @using (Html.BeginForm("Gelirguncelle", "Gelir", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Tarih")
+                        @{
+                            string tarih = Model.Tarih != null ? Model.Tarih.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                        }
+                        <input type="datetime-local" class="form-control" name="Tarih" value="@tarih" />
+                        @Html.Label("Gelir adı")
+                        @Html.TextBoxFor(x => x.GelirAciklama, new { @class = "form-control" })
+                        @Html.Label("Gelir Tutarı")
+                        @Html.TextBoxFor(x => x.Tutar, new { @class = "form-control" })
+                        @Html.Label("Kasa Seçimi")
+                        @Html.DropDownList("Kasaid", ViewBag.dgr1 as List<SelectListItem>, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Gelirid)
+                        <button class="btn btn-info mt-2">Gelir Güncelle</button>
+                    </form>
+                }
+                </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var gelir = $("#GelirAciklama").val();
+            var tutar = $("#Tutar").val();
+            var kasa = $("#Kasaid").val();
+
+            if (gelir === "" || tutar === "" || kasa === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>
+

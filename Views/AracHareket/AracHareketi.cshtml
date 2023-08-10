@@ -1,0 +1,97 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<AracHareket>
+@{
+    ViewBag.Title = "AracHareketi";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Arac Hareketler</a></li>
+                        <li class="breadcrumb-item active">@ViewBag.Arac.Aracplaka</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@ViewBag.Arac.Aracplaka Plakalı Aracın Hareketleri</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/AracHareket" class="btn btn-primary  text-white float-right">GERİ DÖN</a>
+                <h4 class="header-title">@ViewBag.Arac.Aracplaka</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Arac Plaka</th>
+                            <th>İşlem Açıklaması</th>
+                            <th>Tarih</th>
+                            <th>Guzergah</th>
+                            <th>Nakliyeci</th>
+                            <th>Alacak</th>
+                            <th>Borc</th>
+                            <th>Komisyon</th>
+                            <th>Bakiye</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Arac.Aracplaka</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Acıklama </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tarih </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.AracGuzergah </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.AracNakliyeci </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Alacak </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Borc </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Komisyon </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Arachareketid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Bakiye</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

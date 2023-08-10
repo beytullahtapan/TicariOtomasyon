@@ -1,0 +1,65 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Odeme
+@{
+    ViewBag.Title = "Odeme";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Kasa</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Ödeme İşlemi</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Odeme" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Ödeme İşlemleri</h4>
+                @using (Html.BeginForm("OdemeGuncelle", "Odeme", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        <div class="col-12">
+                            <span class="badge-light-dark"><b>Bilgi:</b> Ne İşlemi yapacaksanız(Araç-Cari) onu seçmeniz yeterli.</span>
+                            <span class="badge-light-dark">- <b>Bilgi:</b> Seçinizde Bırakırsanız o işlemi yapmaz.</span>
+                        </div>
+                        @Html.Label("Tarih")
+                        @{
+                            string Tarih = Model.Tarih != null ? Model.Tarih.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                        }
+                        <input type="datetime-local" class="form-control" name="Tarih" value="@Tarih" />
+                        @Html.Label("İşlem Türü")
+                        @Html.DropDownListFor(x => x.OdemeTuru, new SelectList(new[]
+                        {
+                            new SelectListItem { Text = "Ödeme Türü Seçiniz", Value = "0" },
+                            new SelectListItem { Text = "Tahsilat", Value = "1" },
+                            new SelectListItem { Text = "Ödeme", Value = "2" }
+                        }, "Value", "Text", Model.OdemeTuru), new { @class = "form-control" })
+                        @Html.Label("Cari")
+                        @Html.DropDownListFor(x => x.Cariid, (List<SelectListItem>)ViewBag.dgr1, "Seçiniz", new { @class = "form-control", id = "Cariid" })
+                        @Html.Label("Arac")
+                        @Html.DropDownListFor(x => x.Aracid, (List<SelectListItem>)ViewBag.dgr2, "Seçiniz", new { @class = "form-control", id = "Aracid" })
+                        @Html.Label("Kasa")
+                        @Html.DropDownListFor(x => x.Kasaid, (List<SelectListItem>)ViewBag.dgr3, "Seçiniz", new { @class = "form-control", id = "Kasaid" })
+                        @Html.Label("Tutar")
+                        @Html.TextBoxFor(x => x.Tutar, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Odemeid)
+                        <button class="btn btn-info mt-2">Ödeme İşlemi</button>
+                    </form>
+                }
+                </div>
+        </div>
+
+
+    </div>

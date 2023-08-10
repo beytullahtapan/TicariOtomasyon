@@ -1,0 +1,67 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Guzergah
+@{
+    ViewBag.Title = "Güzergahekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Guzergah</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Guzergah Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Guzergah" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Guzergah Ekleme</h4>
+                <form class="form-group" method="post">
+                    @Html.Label("Guzergah adı")
+                    @Html.TextBoxFor(x => x.Guzergahadı, new { @class = "form-control" })
+                    <button class="btn btn-info mt-2">Guzergah ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Guzergahadı = $("#Guzergahadı").val();
+
+
+            if (Guzergahadı === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

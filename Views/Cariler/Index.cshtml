@@ -1,0 +1,172 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Cari>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cariler</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cariler</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Cariler/Cariekle" class="btn btn-primary float-right  text-white m-2">Yeni Cari Ekle</a>
+                <a href="/Cariler/Caridetaylar" class="btn btn-primary  text-white m-2">PDF/EXCEL</a>
+                <hr />
+                <h4 class="header-title">Cariler Tablosu</h4>
+                <br />
+                <div class="filter-section float-right mr-2 ml-2">
+                    <label for="filterCariGrup">Cari Grubu:</label>
+                    <select id="filterCariGrup">
+                        <option value="all">Hepsi</option>
+                        <option value="musteri">Müşteri</option>
+                        <option value="sofor">Sofor</option>
+                        <option value="benzinlik">Benzinlik</option>
+                        <option value="nakliyeci">Nakliyeci</option>
+                    </select>
+                </div>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="sortable-header">
+                        <tr>
+                            <th>Cari iD</th>
+                            <th>Cari İsmi</th>
+                            <th>Telefon</th>
+                            <th>Şehir</th>
+                            <th>Vergi Dairesi</th>
+                            <th>TCK/VKN</th>
+                            <th>Alacak</th>
+                            <th>Borç</th>
+                            <th>Bakiye</th>
+                            <th>Cari Grubu</th>
+                            <th>Yönet</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Cariid </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Cariad </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Caritelefon </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">  @k.CariSehir </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariVergiDairesi </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariTckVKN </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariAlacak </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariBorc </a>
+                                </td>
+                                <td>
+                                    @if (k.CariBakiye > 0)
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.CariBakiye <span class="badge badge-success float-right"> A </span></h5>
+                                        </a>
+                                    }
+                                    else if (k.CariBakiye < 0)
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.CariBakiye <span class="badge badge-danger  float-right"> B </span></h5>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.CariBakiye</h5>
+                                        </a>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if (k.CariGrupid == 1)
+                                        {
+                                            <text>Müşteri</text>
+                                        }
+                                        else if (k.CariGrupid == 2)
+                                        {
+                                            <text>Şofor</text>
+                                        }
+                                        else if (k.CariGrupid == 3)
+                                        {
+                                            <text>Benzinlik</text>
+                                        }
+                                        else if (k.CariGrupid == 4)
+                                        {
+                                            <text>Nakliyeci</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Cariid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Cariid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Cari İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4>
+                <a class="text-dark" href="/CariHareketDetay/Index/@k.Cariid">Cari Hareketleri <i class="fas fa-user float-right"></i></a>
+            </h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Rapor/Cariaraclar/@k.Cariid">Araçlar <i class="fas fa-truck float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Odeme">Ödeme İşlemleri <i class="fas fa-cash-register float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Cariler/CariGetir/@k.Cariid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Cariler/Carisil/@k.Cariid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}

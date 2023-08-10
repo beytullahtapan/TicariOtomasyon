@@ -1,0 +1,92 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Gider>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Gider</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Giderler</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Gider/Giderekle" class="btn btn-primary float-right text-white">Yeni Gider Ekle</a>
+                <h4 class="header-title">Giderler</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Açıklama</th>
+                            <th>Gider</th>
+                            <th>Kasa</th>
+                            <th>Yönet</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Giderid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tarih </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Giderid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.GiderAciklama </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Giderid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tutar </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Giderid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Kasa.Kasaadı </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Giderid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Giderid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Cari İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/Gider/Gidergetir/@k.Giderid">Gelir Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Gider/Gidersil/@k.Giderid">Gelir Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+
+

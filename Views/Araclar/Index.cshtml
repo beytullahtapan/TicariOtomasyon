@@ -1,0 +1,228 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Araclar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Araçlar</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Araclar/Aracekle" class="btn btn-primary float-right text-white">Yeni Araç Ekle</a>
+                <a href="/Araclar/Araclardetay" class="btn btn-primary  text-white m-2">PDF/EXCEL</a>
+                <hr />
+                <h4 class="header-title">Araçlar Tablosu</h4>
+                <br />
+                <div class="filter-section float-right mr-2 ml-2">
+                    <label for="filterAracGrup">Araç Grubu:</label>
+                    <select id="filterAracGrup">
+                        <option value="all">Hepsi</option>
+                        <option value="sirket">Şirket</option>
+                        <option value="kiralik">Kiralık</option>
+                    </select>
+                </div>
+                <div class="filter-section float-right mr-2 ml-2">
+                    <label for="filteraractip">Araç Tipi:</label>
+                    <select id="filteraractip">
+                        <option value="all">Hepsi</option>
+                        @foreach (var aractip in Model.Select(s => s.Aractipi).Distinct())
+                        {
+                            <option value="@aractip.Aractipiname">@aractip.Aractipiname</option>
+                        }
+                    </select>
+                </div>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="sortable-header">
+                        <tr>
+                            <th>Arac Plaka</th>
+                            <th>Arac Dorse Plaka</th>
+                            <th>Cari</th>
+                            <th>Açıklama</th>
+                            <th>Marka</th>
+                            <th>Model</th>
+                            <th>Arac Alacak</th>
+                            <th>Arac Borç</th>
+                            <th>Arac Bakiye</th>
+                            <th>Kasko Tarihi</th>
+                            <th>Bakım Tarihi</th>
+                            <th>Arac Tipi</th>
+                            <th>Arac Grubu</th>
+                            <td>Yönet</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr class="arac-item" data-tipi="@k.Aractipi.Aractipiname">
+
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Aracplaka </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">  @k.Aracdorseplaka </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if (@k.Cariid != null)
+                                        {
+                                            @k.Cari.Cariad
+                                        }
+                                        else
+                                        {
+                                            <text>Baglı Cari Yok</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Aciklama </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Marka </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Model </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.Aracalacak</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.Aracborc</a>
+
+                                </td>
+                                <td>
+                                    @if (k.AracBakiye > 0)
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.AracBakiye <span class="badge badge-success float-right"> A </span></h5>
+                                        </a>
+                                    }
+                                    else if (k.AracBakiye < 0)
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.AracBakiye <span class="badge badge-danger  float-right"> B </span></h5>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#custom-modal" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                           data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                            <h5>@k.AracBakiye</h5>
+                                        </a>
+                                    }
+
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if(@k.KaskoTarihi != null)
+                                        {
+                                        @k.KaskoTarihi
+                                        }
+                                        else
+                                        {
+                                            <text>Belirtilmemiş</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if (@k.BakımTarihi != null)
+                                        {
+                                            @k.BakımTarihi
+                                        }
+                                        else
+                                        {
+                                            <text>Belirtilmemiş</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if (@k.Aractipi.Aractipiname != null)
+                                        {
+                                            @k.Aractipi.Aractipiname
+                                        }
+                                        else
+                                        {
+                                            <text>Belirtilmemiş</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">
+                                        @if (k.Aracgrubuid == 1)
+                                        {
+                                            <text>Şirket</text>
+                                        }
+                                        else if (k.Aracgrubuid == 2)
+                                        {
+                                            <text>Kiralık</text>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="btnYonet-@k.Aracid">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Aracid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Araç İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/AracHareket/AracHareketi/@k.Aracid">Araç Hareketleri <i class="mdi mdi-truck-delivery float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Odeme">Ödeme İşlemleri <i class="fas fa-cash-register float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Aracmasraf/AracMasraf/@k.Aracid">Araç Masrafları <i class="mdi mdi-truck-trailer float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Araclar/Aracgetir/@k.Aracid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Araclar/Aracsil/@k.Aracid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+

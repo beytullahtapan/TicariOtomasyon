@@ -1,0 +1,79 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Kasa
+@{
+    ViewBag.Title = "Kasagetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Kasa</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Kasa Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Kasa" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Kasa Düzenleme</h4>
+                @using (Html.BeginForm("Kasaguncelle", "Kasa", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Kasa Adı")
+                        @Html.TextBoxFor(x => x.Kasaadı, new { @class = "form-control" })
+                        @Html.Label("Kasa Giren")
+                        @Html.TextBoxFor(x => x.Giren, new { @class = "form-control" })
+                        @Html.Label("Kasa Çıkan")
+                        @Html.TextBoxFor(x => x.Cikan, new { @class = "form-control" })
+                        @Html.Label("Kasa Bakiye")
+                        @Html.TextBoxFor(x => x.Bakiye, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Kasaid)
+                        <button class="btn btn-info mt-2">Kasa Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Kasakodu = $("#Kasakodu").val();
+            var Kasaadı = $("#Kasaadı").val();
+
+
+            if (Kasakodu === "" || Kasaadı === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

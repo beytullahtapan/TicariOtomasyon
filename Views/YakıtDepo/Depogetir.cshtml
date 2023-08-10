@@ -1,0 +1,78 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.YakıtDepo
+@{
+    ViewBag.Title = "Depogetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Yakıt Deposu</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Yakıt Deposu Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Depo" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Yakıt Deposu Ekleme</h4>
+                @using (Html.BeginForm("Depogüncelle", "YakıtDepo", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Depo Adı")
+                        @Html.TextBoxFor(x => x.DepoAdi, new { @class = "form-control", })
+                        @Html.Label("Depo Litresi")
+                        @Html.TextBoxFor(x => x.DepoLT, new { @class = "form-control", })
+                        @Html.Label("Depo Kalan Litre")
+                        @Html.TextBoxFor(x => x.KalanLT, new { @class = "form-control", })
+                        @Html.HiddenFor(x => x.Yakitdepoid)
+                        <div class="col-md-6">
+                            <button class="btn btn-info mt-2">Depo Güncelle</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var DepoAdi = $("#DepoAdi").val();
+            var DepoLT = $("#DepoLT").val();
+            var KalanLT = $("#KalanLT").val();
+
+
+            if (DepoAdi === "" || DepoLT === "" || KalanLT === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+</script>

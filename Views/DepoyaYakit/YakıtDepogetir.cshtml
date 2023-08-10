@@ -1,0 +1,94 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.DepoyaYakit
+@{
+    ViewBag.Title = "YakıtDepogetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Yakıt Kullanımı Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box" id="divYakitAlim" style="display: block;">
+                <a href="/Yakıt" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Yakıt Ekleme</h4>
+                @using (Html.BeginForm("YakıtDepogüncelle", "DepoyaYakit", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Tarih")
+                        @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", type = "datetime-local" })
+                        @Html.Label("Alınan Litre")
+                        @Html.TextBoxFor(x => x.AlınanLT, new { @class = "form-control" })
+                        @Html.Label("Birim Fiyat")
+                        @Html.TextBoxFor(x => x.BirimFiyat, new { @class = "form-control" })
+                        @Html.Label("Ödenen Fiyat")
+                        @Html.TextBoxFor(x => x.OdenenFiyat, new { @class = "form-control" })
+                        @Html.Label("Depo")
+                        @Html.DropDownList("YakıtDepoid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "sofor" })
+                        @Html.Label("Firma")
+                        @Html.DropDownList("Firmaid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "sofor" })
+                        @Html.Label("Kasa")
+                        @Html.DropDownList("Kasaid", ViewBag.dgr3 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "sofor" })
+                        <hr />
+                        @Html.Label("Petrol Ofisine: İşleme - İşle")
+                        @Html.CheckBox("Firmaisle", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
+                        @Html.HiddenFor(x => x.Depoyayakitid)
+                        <div class="col-md-6">
+                            <button class="btn btn-info mt-2">Yakıt Kullanımı Güncelle</button>
+                        </div>
+                    </form>
+                }
+                </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Tarih = $("#Tarih").val();
+            var AlınanLT = $("#AlınanLT").val();
+            var BirimFiyat = $("#BirimFiyat").val();
+            var YakıtDepoid = $("#YakıtDepoid").val();
+            var Firmaid = $("#Firmaid").val();
+            var Kasaid = $("#Kasaid").val();
+
+
+
+            if (Tarih === "" || AlınanLT === "" || BirimFiyat === "" || YakıtDepoid === "" || Firmaid === "" || Kasaid === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+</script>

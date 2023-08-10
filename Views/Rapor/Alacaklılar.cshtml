@@ -1,0 +1,65 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Cari>
+@{
+    ViewBag.Title = "Alacaklılar";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Alacaklılar</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Alacaklılar Sayfası</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <h4 class="header-title">Alacaklı Cariler</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Cari Adı</th>
+                            <th>Cari Alacak</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Cariad </a>
+                                </td>
+                                <td>
+                                    <a href="" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariBakiye </a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

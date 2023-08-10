@@ -1,0 +1,49 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Admin
+@{
+    ViewBag.Title = "AdminGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Admin Düzenle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Admin" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Admin Ekleme</h4>
+                @using (Html.BeginForm("Admingüncelle", "Admin", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Admin Kullanıcı adı")
+                        @Html.TextBoxFor(x => x.Kullaniciadi, new { @class = "form-control" })
+                        @Html.Label("Admin İsim Soyisim")
+                        @Html.TextBoxFor(x => x.İsimSoyisim, new { @class = "form-control" })
+                        @Html.Label("Mevcut Şifre")
+                        @Html.Password("CurrentPassword", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("CurrentPassword")
+                        @Html.Label("Yeni Şifre")
+                        @Html.Password("NewPassword", null, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Adminid)
+                        <button class="btn btn-info mt-2">Admin Güncelle</button>
+                    </form>
+                }
+                </div>
+        </div>
+    </div>

@@ -1,0 +1,108 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Admin
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>ClebWeb Ticari Otomasyon Giriş</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Clebweb ticari otomasyon" name="description" />
+    <meta content="Clebweb" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+
+    <!-- App css -->
+    <link href="~/web/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="~/web/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+
+</head>
+
+<body class="authentication-bg">
+    <div class="account-pages pt-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="account-card-box">
+                        <div class="card mb-0">
+                            <div class="card-body p-4">
+
+                                <div class="text-center">
+                                    <div class="my-3">
+                                        <a href="https://clebweb.com/">
+                                            <span><img src="~/web/assets/images/logo.png" alt="Clebweb.com" height="130" /></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <form action="/Login/Login" class="mt-4" method="post">
+                                    <div class="form-group mb-3">
+                                        @Html.Label("Kullanıcı Adı")
+                                        @Html.TextBoxFor(x => x.Kullaniciadi, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        @Html.Label("Şifre")
+                                        @Html.TextBoxFor(x => x.PasswordHash, new { @class = "form-control", type = "password" })
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-success btn-block waves-effect waves-light" type="submit"> Giriş Yap</button>
+                                    </div>
+
+                                </form>
+
+                            </div> <!-- end card-body -->
+                        </div>
+                        <div class="col-md-12 text-center" style="text-decoration:none;color: black;">
+                            <span>Bu Hizmet <a href="https://clebweb.com/">Clebweb</a> Tarafından Yapılmıştır!</span>
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+    <!-- Vendor js -->
+    <script src="~/web/assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/web/assets/js/app.min.js"></script>
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    @if (ViewBag.HataMesaji != null)
+    {
+        <script>
+        Swal.fire('Başarısız', '@ViewBag.HataMesaji', 'error');
+        </script>
+    }
+    @if (ViewBag.SuccessMesaji != null)
+    {
+        <script>
+                                        Swal.fire({
+                                            title: 'Başarılı',
+                                            text: '@ViewBag.SuccessMesaji',
+                                            icon: 'success',
+                                            timer: 3000, // 3 saniye sonra otomatik kapanır
+                                            timerProgressBar: true,
+                                            showConfirmButton: false,
+                                            willClose: () => {
+                                                window.location.href = '/Home';
+                                            }
+                                        });
+        </script>
+    }
+</body>
+</html>
+
+

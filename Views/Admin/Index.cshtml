@@ -1,0 +1,77 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Admin>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Kullanıcılar</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Kullanıcılar</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Admin/Adminekle" class="btn btn-primary float-right  text-white m-2">Yeni Kullanıcı Ekle</a>
+                <h4 class="header-title">Kullanıcılar Tablosu</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Admin iD:</th>
+                            <th>Kullanıcı Adı:</th>
+                            <th>İsim Soyisim:</th>
+                            <th>Yetki:</th>
+                            <th>Yönet</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Adminid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.Adminid </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Adminid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.Kullaniciadi </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Adminid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.İsimSoyisim </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Adminid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">@k.Yetki</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="/Admin/AdminGetir/@k.Adminid">Düzenle</a>
+                                    <a class="btn btn-danger" href="/Admin/Adminsil/@k.Adminid" onclick="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?');">Sil</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

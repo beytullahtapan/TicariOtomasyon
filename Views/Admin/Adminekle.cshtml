@@ -1,0 +1,46 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Admin
+@{
+    ViewBag.Title = "Adminekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Admin Ekleme</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Admin" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Admin Ekleme</h4>
+                @using (Html.BeginForm())
+                { 
+                <form class="form-group" method="post">
+                    @Html.Label("Admin Kullanıcı adı")
+                    @Html.TextBoxFor(x => x.Kullaniciadi, new { @class = "form-control" })
+                    @Html.ValidationMessage("Kullaniciadi")
+                    @Html.Label("Admin İsim Soyisim")
+                    @Html.TextBoxFor(x => x.İsimSoyisim, new { @class = "form-control" })
+                    @Html.Label("Admin Şifre")
+                    @Html.TextBoxFor(x => x.PasswordHash, new { @class = "form-control", type = "password" })
+                    <button class="btn btn-info mt-2">Admin ekle</button>
+                </form>
+                }
+            </div>
+        </div>
+    </div>

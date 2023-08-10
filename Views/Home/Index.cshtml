@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Aracekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Anasayfa</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box tilebox-one">
+                <i class="mdi mdi-account-multiple-outline float-right m-0 h2 text-muted"></i>
+                <h6 class="text-muted text-uppercase mt-0">Cari Hesapları</h6>
+                <h3 class="my-3" data-plugin="counterup">@ViewBag.CariHesapSayisi</h3>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box tilebox-one">
+                <i class="mdi mdi-cash-multiple float-right m-0 h2 text-muted"></i>
+                <h6 class="text-muted text-uppercase mt-0">Kasa Bakiyesi</h6>
+                <h3 class="my-3"><span data-plugin="counterup">@ViewBag.Kasabakiyesi</span>₺</h3>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box tilebox-one">
+                <i class="mdi mdi-truck-fast float-right m-0 h2 text-muted"></i>
+                <h6 class="text-muted text-uppercase mt-0">Toplam Sefer</h6>
+                <h3 class="my-3"><span data-plugin="counterup">@ViewBag.toplamseferler</span></h3>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card-box tilebox-one">
+                <i class="mdi mdi-truck float-right m-0 h2 text-muted"></i>
+                <h6 class="text-muted text-uppercase mt-0">Araçlar</h6>
+                <h3 class="my-3"><span data-plugin="counterup">@ViewBag.toplamarac</span></h3>
+            </div>
+        </div>
+    </div>
+    </div>

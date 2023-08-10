@@ -1,0 +1,101 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Depoyakıt
+@{
+    ViewBag.Title = "YakıtGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Yakıt Depo</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Depodan Kullanım Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box" id="divYakitAlim" style="display: block;">
+                <a href="/Yakıt" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Yakıt Ekleme</h4>
+                @using (Html.BeginForm("YakıtGüncelle", "DepoYakıt", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Arac")
+                        @Html.DropDownList("Aracid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "Aracid", onchange = "getKm()" })
+                        @Html.Label("Tarih")
+                        @{
+                            string Tarih = Model.Tarih != null ? Model.Tarih.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                        }
+                        <input type="datetime-local" class="form-control" name="Tarih" value="@Tarih" />
+                        @Html.Label("İlk KM")
+                        @Html.TextBoxFor(x => x.İlkkm, new { @class = "form-control", id = "İlkkm", })
+                        @Html.Label("Son KM")
+                        @Html.TextBoxFor(x => x.Sonkm, new { @class = "form-control", onchange = "calculateYakitYuzde()" })
+                        @Html.Label("Alınan lt")
+                        @Html.TextBoxFor(x => x.AlinanLt, new { @class = "form-control", id = "alinanLt", onchange = "calculateYakitYuzde()" })
+                        @Html.Label("Birim Tutar")
+                        @Html.TextBoxFor(x => x.Birimtutar, new { @class = "form-control" })
+                        @Html.Label("Yakıt Deposu")
+                        @Html.DropDownList("Yakıtdepoid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                        @Html.Label("Sofor")
+                        @Html.DropDownList("Soforid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "sofor" })
+                        <hr />
+                        @Html.Label("Araç Kartına: İşleme - İşle")
+                        @Html.CheckBox("Arackart", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
+                        @Html.HiddenFor(x => x.Depoyakıtid)
+                        <div class="col-md-6">
+                            <button class="btn btn-info mt-2">Yakıt Kullanımı ekle</button>
+                        </div>
+                    </form>
+                }
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var aracId = $("#Aracid").val();
+            var ilkKm = $("#İlkkm").val();
+            var sonKm = $("#Sonkm").val();
+            var alinanLt = $("#alinanLt").val();
+            var guzergah = $("#Güzergah").val();
+            var yakitYuzde = $("#yakitYuzde").val();
+            var soforId = $("#Soforid").val();
+            var kasaId = $("#Kasaid").val();
+
+            if (aracId === "" || ilkKm === "" || sonKm === "" || alinanLt === ""  || guzergah === "" || yakitYuzde === "" || soforId === "" || kasaId === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+</script>
+
+
+

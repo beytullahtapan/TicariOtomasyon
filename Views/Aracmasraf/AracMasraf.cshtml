@@ -1,0 +1,105 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Aracmasraf>
+@{
+    ViewBag.Title = "AracMasraf";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title"> @ViewBag.Arac.Aracplaka Plakalı'lı Aracın Masraf Tablosu</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Aracmasraf/Masrafekle" class="btn btn-primary float-right text-white">Yeni Masraf Ekle</a>
+                <h4 class="header-title m-3"> @ViewBag.Arac.Aracplaka</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="sortable-header">
+                        <tr>
+                            <th>Arac Plaka</th>
+                            <th>Sefer</th>
+                            <th>Güzergah</th>
+                            <th>Masraflar</th>
+                            <th>Masraf Toplamı</th>
+                            <td>Yönet</td>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracmasrafid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Arac.Aracplaka </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracmasrafid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#">  @k.Sefer.Seferno </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracmasrafid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Sefer.Guzergah.Guzergahadı </a>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(k.Masraf))
+                                    {
+                                        string[] masrafAdlariVeFiyatlari = k.Masraf.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                        foreach (var masrafAdiVeFiyati in masrafAdlariVeFiyatlari)
+                                        {
+                                            string[] masrafDetaylari = masrafAdiVeFiyati.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                                            string masrafAdi = masrafDetaylari[0].Trim();
+                                            <a href="#custom-modal-@k.Aracmasrafid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                               data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @masrafAdi </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracmasrafid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tutar </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Aracmasrafid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Aracmasrafid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Araç İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/Aracmasraf/MasrafDuzenle/@k.Aracmasrafid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Aracmasraf/MasrafGetir/@k.Aracmasrafid">Detay <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/Araclar/Aracsil/@k.Aracmasrafid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+
+

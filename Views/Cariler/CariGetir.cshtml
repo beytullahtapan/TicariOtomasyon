@@ -1,0 +1,95 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Cari
+@{
+    ViewBag.Title = "CariGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cariler</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Cariler" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Cari Ekleme</h4>
+                @using (Html.BeginForm("CariGüncelle", "Cariler", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.LabelFor(x => x.Cariad)
+                        @Html.TextBoxFor(x => x.Cariad, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.Caritelefon)
+                        @Html.TextBoxFor(x => x.Caritelefon, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariSehir)
+                        @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control" })
+                        @Html.Label("Cari Gsm")
+                        @Html.TextBoxFor(x => x.Carigsm, new { @class = "form-control" })
+                        @Html.Label("Cari İban")
+                        @Html.TextBoxFor(x => x.Cariiban, new { @class = "form-control" })
+                        @Html.Label("Cari Adres")
+                        @Html.TextBoxFor(x => x.Cariadress, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariVergiDairesi)
+                        @Html.TextBoxFor(x => x.CariVergiDairesi, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariTckVKN)
+                        @Html.TextBoxFor(x => x.CariTckVKN, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariBorc)
+                        @Html.TextBoxFor(x => x.CariBorc, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariAlacak)
+                        @Html.TextBoxFor(x => x.CariAlacak, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariBakiye)
+                        @Html.TextBoxFor(x => x.CariBakiye, new { @class = "form-control" })
+                        @Html.LabelFor(x => x.CariGrupid)
+                        @Html.DropDownListFor(x => x.CariGrupid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Cariid)
+                        <button class="btn btn-info mt-2">Cari Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Cariad = $("#Cariad").val();
+            var CariTckVKN = $("#CariTckVKN").val();
+            var Carigrup = $("#CariGrupid").val();
+
+
+
+            if (Carigrup === "" || Cariad === "" || CariTckVKN === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

@@ -1,0 +1,107 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Araclar
+@{
+    ViewBag.Title = "Aracekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Araç Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Araclar" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Araç Ekleme</h4>
+                <form class="form-group" method="post">
+                    <div class="row">
+                        <div class="col-6">
+                            @Html.Label("Arac Plaka")
+                            @Html.TextBoxFor(x => x.Aracplaka, new { @class = "form-control" })
+                            @Html.Label("Arac Dorse Plaka")
+                            @Html.TextBoxFor(x => x.Aracdorseplaka, new { @class = "form-control" })
+                            @Html.Label("Telefon/GSM")
+                            @Html.TextBoxFor(x => x.telefon, new { @class = "form-control" })
+                            @Html.Label("Araç Açıklama")
+                            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+                            @Html.Label("Araç Marka")
+                            @Html.TextBoxFor(x => x.Marka, new { @class = "form-control" })
+                            @Html.Label("Araç Modeli")
+                            @Html.TextBoxFor(x => x.Model, new { @class = "form-control" })
+                            @Html.Label("Araç km")
+                            @Html.TextBoxFor(x => x.Km, new { @class = "form-control" })
+                            @Html.Label("Arac Son Bakım km")
+                            @Html.TextBoxFor(x => x.sonbakımkm, new { @class = "form-control" })
+                        </div>
+                        <div class="col-6">
+                            @Html.Label("Cari")
+                            @Html.DropDownList("Cariid", ViewBag.dgr3 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.Label("Ruhsat Sahibi")
+                            @Html.TextBoxFor(x => x.ruhsat, new { @class = "form-control" })
+                            @Html.Label("Şofor")
+                            @Html.DropDownList("Soforid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.Label("Arac Dorse Tipi")
+                            @Html.DropDownList("Aractipiid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.Label("Arac Grubu")
+                            @Html.DropDownList("Aracgrubuid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.Label("Araç Sigorta tarihi")
+                            @Html.TextBoxFor(x => x.SigortaTarihi, new { @class = "form-control", type = "datetime-local" })
+                            @Html.Label("Araç MuayeneTarihi")
+                            @Html.TextBoxFor(x => x.MuayeneTarihi, new { @class = "form-control", type = "datetime-local" })
+                            @Html.Label("Araç Kasko Tarihi")
+                            @Html.TextBoxFor(x => x.KaskoTarihi, new { @class = "form-control", type = "datetime-local" })
+                            @Html.Label("Araç Bakım Tarihi")
+                            @Html.TextBoxFor(x => x.BakımTarihi, new { @class = "form-control", type = "datetime-local" })
+                        </div>
+                    </div>
+                    <button class="btn btn-info mt-2">Araç ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var aracplaka = $("#Aracplaka").val();
+            var Marka = $("#Marka").val();
+            var Model = $("#Model").val();
+            var Aractipiid = $("#Aractipiid").val();
+            var Aracgrubuid = $("#Aracgrubuid").val();
+
+
+            if (aracplaka === ""  || Marka === "" || Model === ""  || Aractipiid === "" || Aracgrubuid === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>
+

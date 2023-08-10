@@ -1,0 +1,118 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<DepoyaYakit>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Depoya Yakıt Alımları</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Depoya Yakıt Alımları</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/DepoyaYakit/Yakıtekle" class="btn btn-primary float-right text-white">Yakıt Kullanımı Ekle</a>
+                <hr />
+                <h4 class="header-title">Depoya Yakıt alım tablosu</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Depo Adı</th>
+                            <th>Alınan Firma</th>
+                            <th>Alınan Litre</th>
+                            <th>Birim  Fiyat</th>
+                            <th>Toplam  Fiyat</th>
+                            <th>Kalan Litre</th>
+                            <th>Depo Litresi</th>
+                            <th>Depo Yüzdesi</th>
+                            <th>Yönet</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tarih</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.YakıtDepo.DepoAdi</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Firma.Cariad</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.AlınanLT</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.BirimFiyat</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.ToplamFiyat</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.KalanLT</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.YakıtDepo.DepoLT</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.YakıtDepo.DepoYüzde</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Depoyayakitid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Depoyayakitid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Yakıt İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/DepoyaYakit/YakıtDepogetir/@k.Depoyayakitid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/DepoyaYakit/Depoyayakitsil/@k.Depoyayakitid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+
+
+

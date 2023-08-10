@@ -1,0 +1,103 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Seferler
+@{
+    ViewBag.Title = "Sefergetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cariler</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Cariler" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Cari Ekleme</h4>
+                @using (Html.BeginForm("Sefergüncelle", "Seferler", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        <div class="form-row">
+                            <div class="col-sm-6 my-form">
+                                @Html.Label("Araç Seçimi")
+                                @Html.DropDownList("Aracid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "Aracid" })
+                                @Html.Label("Şoför Seçimi")
+                                @Html.DropDownList("Soforid", ViewBag.dgr3 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "soforSelect" })
+                                @Html.Label("Nakliyeci")
+                                @Html.DropDownList("Nakliyeciid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.Label("Güzergah")
+                                @Html.DropDownList("Güzergahid", ViewBag.dgr6 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", })
+                                @Html.Label("Sefer Kodu")
+                                @Html.TextBoxFor(x => x.Seferno, new { @class = "form-control" })
+                                @Html.Label("Açıklama")
+                                @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+                                @Html.Label("Fatura Numarası")
+                                @Html.TextBoxFor(x => x.FaturaNo, new { @class = "form-control" })
+                                @Html.Label("İrasilye Numarası")
+                                @Html.TextBoxFor(x => x.İrsaliyeNo, new { @class = "form-control" })
+                                @Html.Label("Tonaj")
+                                @Html.TextBoxFor(x => x.tonaj, new { @class = "form-control" })
+                                @Html.Label("Birim Fiyat")
+                                @Html.TextBoxFor(x => x.Birimfiyat, new { @class = "form-control" })
+                                @Html.Label("Nakliye Fiyatı")
+                                @Html.TextBoxFor(x => x.Nakliyefiyat, new { @class = "form-control", id = "Nakliyefiyat" })
+                                @Html.Label("Araca Ödenen Tutar")
+                                @Html.TextBoxFor(x => x.Aracaödenentutar, new { @class = "form-control", id = "Aracaödenentutar" })
+                                @Html.Label("Komisyon Tutarı")
+                                @Html.TextBoxFor(x => x.Komisyon, new { @class = "form-control" })
+                                @Html.Label("Teslim Evrağı Kargo Takip:")
+                                @Html.TextBoxFor(x => x.Kargotakipno, new { @class = "form-control" })
+                                <hr />
+                                @Html.Label("Komisyonlu Sefer: Hayır - Evet")
+                                @Html.CheckBox("KomisyonluSefer", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control", id = "KomisyonluSeferd" })
+                                @Html.Label("Teslim Evragı: Yok - Var")
+                                @Html.CheckBox("Teslimevrak", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
+                                @Html.Label("Fatura Durumu:")
+                                @Html.CheckBox("Faturadurum", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
+                                @Html.Label("Nakit - Cari:")
+                                @Html.CheckBox("Carimi", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
+
+                            </div>
+                            <div class="col-sm-6 my-form">
+                                @Html.Label("Cari")
+                                @Html.DropDownList("Cariid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.Label("Kasa Seçimi")
+                                @Html.DropDownList("Kasaid", ViewBag.dgr4 as List<SelectListItem>, new { @class = "form-control" })
+                                @Html.Label("Alınan Tutar")
+                                @Html.TextBoxFor(x => x.Alinantutar, new { @class = "form-control" })
+                                @Html.Label("Yükleme Yeri")
+                                @Html.TextBoxFor(x => x.Yüklemeyeri, new { @class = "form-control" })
+                                @Html.Label("Boşaltma Yeri")
+                                @Html.TextBoxFor(x => x.Bosaltmayeri, new { @class = "form-control" })
+                                @Html.Label("Navlun Bedeli")
+                                @Html.TextBoxFor(x => x.NavlunBedel, new { @class = "form-control", id = "NavlunBedel" })
+                                <div id="warningMessage" style="color: red; display: none;"></div>
+                                @Html.Label("Sefer Tarihi")
+                                @{
+                                    string serfertarih = Model.Tarih != null ? Model.Tarih.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                                }
+                                <input type="datetime-local" class="form-control" name="Tarih" value="@serfertarih" />
+                                @Html.HiddenFor(x => x.Seferid)
+                            </div>
+                        </div>
+                        <button class="btn btn-info mt-2">Sefeler Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+</div>
+ </div>

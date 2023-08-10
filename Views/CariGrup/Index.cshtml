@@ -1,0 +1,79 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<CariGrup>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cari Grup</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Grup</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/CariGrup/Carigrupekle" class="btn btn-primary float-right text-white">Yeni Grup Ekle</a>
+                <a href="/CariGrup/Carigrupdetay" class="btn btn-primary  text-white m-2">PDF/EXCEL</a>
+                <hr />
+                <h4 class="header-title">Cari Grup Tablosu</h4>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Cari Grup Adı</th>
+                            <th>Yönet</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.CariGrupid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.CariGrupName </a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.CariGrupid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.CariGrupid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Cari İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/CariGrup/Carigrupgetir/@k.CariGrupid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/CariGrup/Carigrupsil/@k.CariGrupid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+
+

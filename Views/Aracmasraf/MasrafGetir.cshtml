@@ -1,0 +1,63 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Aracmasraf
+@{
+    ViewBag.Title = "MasrafGetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title"> @Model.Arac.Aracplaka Plakalı Araç @Model.Sefer.Guzergah.Guzergahadı  Masrafları</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Aracmasraf/" class="text-white btn btn-primary float-right">Geri Dön</a>
+                                <h5>Masraflar:</h5>
+                                @if (Model != null && !string.IsNullOrEmpty(Model.Masraf))
+                                {
+                                    string[] masrafAdlariVeFiyatlari = Model.Masraf.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                    <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Tarih</th>
+                                                <th>Masraf Adı</th>
+                                                <th>Masraf Tutarı</th>
+                                                <th>Sefer Kodu</th>
+                                                <th>Güzergah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var masrafAdiVeFiyati in masrafAdlariVeFiyatlari)
+                                            {
+                                                string[] masrafDetaylari = masrafAdiVeFiyati.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                                                string masrafAdi = masrafDetaylari[0].Trim();
+                                                string masrafTutari = masrafDetaylari[1].Trim();
+                                                <tr>
+                                                    <td>@Model.Tarih</td>
+                                                    <td>@masrafAdi</td>
+                                                    <td>@masrafTutari</td>
+                                                    <td>@Model.Sefer.Seferno</td>
+                                                    <td>@Model.Sefer.Guzergah.Guzergahadı</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    
+                                }
+                            </div>
+                        </div>
+            </div>
+</div>

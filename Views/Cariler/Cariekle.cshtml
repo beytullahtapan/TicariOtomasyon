@@ -1,0 +1,88 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Cari
+@{
+    ViewBag.Title = "Cariekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cariler</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Cariler" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Cari Ekleme</h4>
+                <form class="form-group" method="post">
+                    @Html.Label("Cari adı")
+                    @Html.TextBoxFor(x => x.Cariad, new { @class = "form-control" })
+                    @Html.Label("Cari Telefon")
+                    @Html.TextBoxFor(x => x.Caritelefon, new { @class = "form-control" })
+                    @Html.Label("Cari Şehir")
+                    @Html.TextBoxFor(x => x.CariSehir, new { @class = "form-control" })
+                    @Html.Label("Cari Gsm")
+                    @Html.TextBoxFor(x => x.Carigsm, new { @class = "form-control" })
+                    @Html.Label("Cari İban")
+                    @Html.TextBoxFor(x => x.Cariiban, new { @class = "form-control" })
+                    @Html.Label("Cari Adres")
+                    @Html.TextBoxFor(x => x.Cariadress, new { @class = "form-control" })
+                    @Html.Label("Cari Vergi Dairesi")
+                    @Html.TextBoxFor(x => x.CariVergiDairesi, new { @class = "form-control" })
+                    @Html.Label("Cari TCK/VKN")
+                    @Html.TextBoxFor(x => x.CariTckVKN, new { @class = "form-control" })
+                    <div id="errorDiv" class="alert alert-danger mt-1" style="display:none"></div>
+                    @Html.Label("Cari Grubu")
+                    @Html.DropDownListFor(x => x.CariGrupid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+                    <button class="btn btn-info mt-2">Cari ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Cariad = $("#Cariad").val();
+            var Caritelefon = $("#Caritelefon").val();
+            var CariSehir = $("#CariSehir").val();
+            var CariVergiDairesi = $("#CariVergiDairesi").val();
+            var CariTckVKN = $("#CariTckVKN").val();
+            var Carigrup = $("#CariGrupid").val();
+
+
+
+            if (Carigrup === "" || Cariad === ""  || CariTckVKN === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

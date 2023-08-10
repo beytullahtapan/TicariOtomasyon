@@ -1,0 +1,135 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Araclar
+@{
+    ViewBag.Title = "Aracgetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Araç Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Araclar" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Araç Güncelle</h4>
+                @using (Html.BeginForm("Aracgüncelle", "Araclar", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.Label("Arac Plaka")
+                                @Html.TextBoxFor(x => x.Aracplaka, new { @class = "form-control" })
+                                @Html.Label("Arac Dorse Plaka")
+                                @Html.TextBoxFor(x => x.Aracdorseplaka, new { @class = "form-control" })
+                                @Html.Label("Araç Açıklama")
+                                @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+                                @Html.Label("Telefon/GSM")
+                                @Html.TextBoxFor(x => x.telefon, new { @class = "form-control" })
+                                @Html.Label("Araç Marka")
+                                @Html.TextBoxFor(x => x.Marka, new { @class = "form-control" })
+                                @Html.Label("Araç Modeli")
+                                @Html.TextBoxFor(x => x.Model, new { @class = "form-control" })
+                                @Html.Label("Araç km")
+                                @Html.TextBoxFor(x => x.Km, new { @class = "form-control" })
+                                @Html.Label("Arac Son Bakım km")
+                                @Html.TextBoxFor(x => x.sonbakımkm, new { @class = "form-control" })
+                                @Html.Label("Arac Alacak")
+                                @Html.TextBoxFor(x => x.Aracalacak, new { @class = "form-control" })
+                                @Html.Label("Arac Borc")
+                                @Html.TextBoxFor(x => x.Aracborc, new { @class = "form-control" })
+                                @Html.Label("Arac Bakiye")
+                                @Html.TextBoxFor(x => x.AracBakiye, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Cari")
+                                @Html.DropDownList("Cariid", ViewBag.dgr3 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.Label("Ruhsat Sahibi")
+                                @Html.TextBoxFor(x => x.ruhsat, new { @class = "form-control" })
+                                @Html.Label("Şofor")
+                                @Html.DropDownList("Soforid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.Label("Arac Dorse Tipi")
+                                @Html.DropDownList("Aractipiid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.Label("Arac Grubu")
+                                @Html.DropDownList("Aracgrubuid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                                @Html.HiddenFor(x => x.Aracid)
+                                @Html.Label("Araç Sigorta Tarihi")
+                                @{
+                                    string aracsigorta = Model.SigortaTarihi != null ? Model.SigortaTarihi.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                                }
+                                <input type="datetime-local" class="form-control" name="SigortaTarihi" value="@aracsigorta" />
+                                @Html.Label("Araç Muayene Tarihi")
+                                @{
+                                    string aracmuayene = Model.SigortaTarihi != null ? Model.MuayeneTarihi.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                                }
+                                <input type="datetime-local" class="form-control" name="MuayeneTarihi" value="@aracmuayene" />
+                                @Html.Label("Araç Kasko Tarihi")
+                                @{
+                                    string arackasko = Model.KaskoTarihi != null ? Model.KaskoTarihi.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                                }
+                                <input type="datetime-local" class="form-control" name="KaskoTarihi" value="@arackasko" />
+                                @Html.Label("Araç Bakım Tarihi")
+                                @{
+                                    string aracbakim = Model.BakımTarihi != null ? Model.BakımTarihi.Value.ToString("yyyy-MM-ddTHH:mm") : string.Empty;
+                                }
+                                <input type="datetime-local" class="form-control" name="BakımTarihi" value="@aracbakim" />
+
+                            </div>
+                        </div>
+
+                        <button class="btn btn-info mt-2">Araç Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+
+ <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var aracplaka = $("#Aracplaka").val();
+            var Aracalacak = $("#Aracalacak").val();
+            var Aracborc = $("#Aracborc").val();
+            var Marka = $("#Marka").val();
+            var Model = $("#Model").val();
+            var Aractipiid = $("#Aractipiid").val();
+            var Aracgrubuid = $("#Aracgrubuid").val();
+
+
+            if (aracplaka === "" || Aracalacak === "" || Aracborc === "" || Marka === "" || Model === ""  || Aractipiid === "" || Aracgrubuid === "" ) {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

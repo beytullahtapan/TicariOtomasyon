@@ -1,0 +1,117 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Aracmasraf
+
+@{
+    ViewBag.Title = "Masrafekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araçlar</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Araç Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Aracmasraf" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Araç Ekleme</h4>
+                <button id="addExpenseField" class="btn btn-info mt-2">Yeni Masraf Oluştur</button>
+                <form class="form-group" id="expenseForm" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            @Html.Label("Araç Plaka")
+                            @Html.DropDownList("expenses[0].Aracid", ViewBag.dgr2 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "Aracid" })
+                            @Html.Label("Sefer Kodu")
+                            @Html.DropDownList("expenses[0].Seferid", ViewBag.dgr1 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                    <tr>
+                                        <th>Masraf Adı</th>
+                                        <th>Masraf Tutarı</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenseFieldsWrapper">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="expenses[0].Masraf" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="expenses[0].Tutar" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm removeExpenseField">Kaldır</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button class="btn btn-info mt-2">Masraf ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var expenseCounter = 0;
+
+        $("#addExpenseField").click(function (e) {
+            e.preventDefault();
+            expenseCounter++;
+
+            var newExpenseField = `
+            <tr>
+                <td>
+                    <input type="text" name="expenses[${expenseCounter}].Masraf" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="expenses[${expenseCounter}].Tutar" class="form-control" />
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm removeExpenseField">Kaldır</button>
+                </td>
+            </tr>
+            `;
+
+            $("#expenseFieldsWrapper").append(newExpenseField);
+        });
+
+        // Handle removal of dynamically added expense fields
+        $("#expenseFieldsWrapper").on("click", ".removeExpenseField", function (e) {
+            e.preventDefault();
+            expenseCounter--;
+            $(this).closest("tr").remove();
+        });
+
+        $("#expenseForm").submit(function (event) {
+            event.preventDefault();
+
+            // Remove empty dynamically added fields before submitting the form
+            $("#expenseFieldsWrapper tr").each(function () {
+                var masraf = $(this).find("[name$='.Masraf']").val();
+                var tutar = $(this).find("[name$='.Tutar']").val();
+                if (masraf === "" && tutar === "") {
+                    $(this).remove();
+                }
+            });
+
+            // Submit the form
+            $("#expenseForm").unbind("submit").submit();
+        });
+    });
+</script>

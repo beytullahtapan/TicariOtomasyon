@@ -1,0 +1,72 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.AracTipi
+@{
+    ViewBag.Title = "Aractipgetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Araç Tipi</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Araç Tipi Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/AracTipi" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Cari Grup Düzenleme</h4>
+                @using (Html.BeginForm("Aractipguncelle", "AracTipi", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Araç Tip Adı")
+                        @Html.TextBoxFor(x => x.Aractipiname, new { @class = "form-control" })
+                        @Html.HiddenFor(x => x.Aractipiid)
+                        <button class="btn btn-info mt-2">Araç Tipi Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var Aractipiname = $("#Aractipiname").val();
+
+
+
+            if (Aractipiname === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

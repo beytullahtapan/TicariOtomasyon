@@ -1,0 +1,103 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<YakıtDepo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Yakıt Deposu</a></li>
+                        <li class="breadcrumb-item active">Listele</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Yakıt Deposu</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/YakıtDepo/Depoekle" class="btn btn-primary float-right text-white">Yakıt Deposu Ekle</a>
+                <h4 class="header-title">Yakıt Depo Tablosu</h4>
+                <div class="filter-section float-right mr-2 ml-2">
+                    <label for="filterAracGrup">Araç Grubu:</label>
+                    <select id="filterAracGrup">
+                        <option value="all">Hepsi</option>
+                        <option value="sirket">Şirket</option>
+                        <option value="kiralik">Kiralık</option>
+                    </select>
+                </div>
+                <table id="responsive-datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Depo Adı</th>
+                            <th>Depo Litresi</th>
+                            <th>Depo Kalan Litre</th>
+                            <th>Depo Yüzdesi</th>
+                            <th>Yönet</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.Tarih</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.DepoAdi</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.DepoLT</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.KalanLT</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="text-dark" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="#"> @k.DepoYüzde%</a>
+                                </td>
+                                <td>
+                                    <a href="#custom-modal-@k.Yakitdepoid" class="btn btn-primary" data-animation="door" data-plugin="custommodal"
+                                       data-overlaySpeed="100" data-overlayColor="#36404a" id="">Yönet</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@foreach (var k in Model)
+{
+    <div id="custom-modal-@k.Yakitdepoid" class="modal-demo">
+        <button type="button" class="close" onclick="Custombox.modal.close();">
+            <span>&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="custom-modal-title">Yakıt İşlemleri</h4>
+        <div class="custom-modal-text text-muted">
+            <h4><a class="text-dark" href="/YakıtDepo/Depogetir/@k.Yakitdepoid">Düzenle <i class="fas fa-edit float-right"></i></a></h4>
+            <hr class="border border-primary border-1 opacity-50">
+            <h4><a class="text-dark" href="/YakıtDepo/Yakıtdeposil/@k.Yakitdepoid">Sil <i class="fas fa-user-minus float-right"></i></a></h4>
+        </div>
+    </div>
+}
+

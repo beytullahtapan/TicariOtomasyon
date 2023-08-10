@@ -1,0 +1,83 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.CariGrup
+@{
+    ViewBag.Title = "Carigrupgetir";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cari Gruplar</a></li>
+                        <li class="breadcrumb-item active">Düzenle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Cari Grup Düzenle</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/CariGrup" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Cari Grup Düzenleme</h4>
+                @using (Html.BeginForm("Carigrupgüncelle", "CariGrup", FormMethod.Post))
+                {
+                    <form class="form-group" method="post">
+                        @Html.Label("Cari Grup Adı")
+                        @Html.TextBoxFor(x => x.CariGrupName, new { @class = "form-control" })
+                        @Html.Label("Cari id")
+                        @Html.TextBoxFor(x => x.Carigrup, new { @class = "form-control", type = "number" })
+                        <div>
+                            <span>Müşteri - 1</span>
+                            <span>Şofor - 2</span>
+                            <span>Benzilik - 3</span>
+                            <span>Nakliyeci - 4</span>
+                        </div>
+                        @Html.HiddenFor(x => x.CariGrupid)
+                        <button class="btn btn-info mt-2">Cari Grup Güncelle</button>
+                    </form>
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var CariGrupName = $("#CariGrupName").val();
+            var Carigrup = $("#Carigrup").val();
+
+
+
+            if (CariGrupName === "" || Carigrup === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>

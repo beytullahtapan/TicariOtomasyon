@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="card-body">
+                    <h2>Hata Oluştu</h2>
+                    <p>@ViewBag.ErrorMessage</p>
+                    <p>@ViewBag.InnerErrorMessage</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@using MvcTicariOtomasyon.Models.Siniflar;
+@model List<Seferler>
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>ClebWeb Ticari Otomasyon</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Table datatable css -->
+    <link href="~/web/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom box css -->
+    <link href="~/web/assets/libs/custombox/custombox.min.css" rel="stylesheet">
+    <!-- App css -->
+    <link href="~/web/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="~/web/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+</head>
+<body>
+
+    <div class="col-12">
+        <div class="card-box">
+            <a href="/Seferler" class="btn btn-primary float-right text-white">Geri Dön</a>
+            <h4 class="header-title">Seferler Tablosu</h4>
+            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Sefer Tarihi</th>
+                        <th>Fatura NO</th>
+                        <th>İrsaliye No</th>
+                        <th>Araç</th>
+                        <th>Şoför</th>
+                        <th>Güzergah</th>
+                        <th>Cari</th>
+                        <th>Nakliyeci</th>
+                        <th>Komisyon</th>
+                        <th>Navlun Bedeli</th>
+                        <th>Tonaj</th>
+                        <th>Alınan Tutar</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @foreach (var k in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a class="text-dark"> @k.Tarih </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.FaturaNo </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.İrsaliyeNo </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Arac.Aracplaka </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Sofor.Cariad </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Guzergah.Guzergahadı </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Cari.Cariad </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Nakliyeci.Cariad </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Komisyon </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.NavlunBedel </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.tonaj </a>
+                            </td>
+                            <td>
+                                <a class="text-dark"> @k.Alinantutar </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="~/web/assets/js/vendor.min.js"></script>
+
+    <!-- Modal-Effect -->
+    <script src="~/web/assets/libs/custombox/custombox.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/web/assets/js/app.min.js"></script>
+    <script src="~/web/assets/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="~/web/assets/libs/pdfmake/vfs_fonts.js"></script>
+    <script src="~/web/assets/libs/jszip/jszip.min.js"></script>
+    <!-- Datatable plugin js -->
+    <script src="~/web/assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/web/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/web/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/web/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/buttons.html5.min.js"></script>
+    <script src="~/web/assets/libs/datatables/buttons.print.min.js"></script>
+
+    <!-- Datatables init -->
+    <script src="~/web/assets/js/pages/datatables.init.js"></script>
+</body>
+</html>

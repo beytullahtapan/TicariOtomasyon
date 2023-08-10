@@ -1,0 +1,76 @@
+﻿@model MvcTicariOtomasyon.Models.Siniflar.Gider
+@{
+    ViewBag.Title = "Giderekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Anasayfa</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Gider</a></li>
+                        <li class="breadcrumb-item active">Ekle</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Gider Ekle</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <a href="/Gider" class="text-white btn btn-primary float-right">Geri Dön</a>
+                <h4 class="header-title mb-4">Gider Ekleme</h4>
+                <form class="form-group" method="post">
+                    @Html.Label("Tarih")
+                    @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", type = "datetime-local" })
+                    @Html.Label("Gider adı")
+                    @Html.TextBoxFor(x => x.GiderAciklama, new { @class = "form-control" })
+                    @Html.Label("Gider Tutarı")
+                    @Html.TextBoxFor(x => x.Tutar, new { @class = "form-control" })
+                    @Html.Label("Kasa Seçimi")
+                    @Html.DropDownList("Kasaid", ViewBag.dgr1 as List<SelectListItem>, new { @class = "form-control" })
+                    <button class="btn btn-info mt-2">Gider ekle</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            // Formun submit işlemini engellemek için
+            event.preventDefault();
+
+            // Zorunlu alanların değerlerini kontrol etme
+            var gider = $("#GiderAciklama").val();
+            var tutar = $("#Tutar").val();
+            var kasa = $("#Kasaid").val();
+
+            if (gider === "" || tutar === "" || kasa === "") {
+                // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
+                Swal.fire({
+                    title: 'Hata!',
+                    text: 'Tüm Alanları Doldurmanız gerekiyor',
+                    icon: 'error',
+                    confirmButtonText: 'Tamam'
+                });
+            } else {
+                // Formu gönderme
+                $("form").unbind("submit").submit();
+            }
+        });
+    });
+    </script>
+
+
+
+

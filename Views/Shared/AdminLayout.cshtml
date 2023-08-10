@@ -1,0 +1,285 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>ClebWeb | Ticari Otomasyon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Ticari Otomasyon" name="description" />
+    <meta content="clebweb" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+    <!-- Sweet Alert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" />
+
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Diğer başlık ve içerikler -->
+    <!-- Table datatable css -->
+    <link href="~/web/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/web/assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/libs/multiselect/multi-select.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom box css -->
+    <link href="~/web/assets/libs/custombox/custombox.min.css" rel="stylesheet">
+    <!-- App css -->
+    <link href="~/web/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="~/web/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/web/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+    <link href="~/web/assets/css/main.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation Bar-->
+    <header id="topnav">
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <div class="container-fluid">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
+
+                    <li class="dropdown notification-list">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle nav-link">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <span class="d-none d-sm-inline-block ml-1 font-weight-medium">@User.Identity.Name</span>
+                            <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow text-white m-0">Hoşgeldiniz !</h6>
+                            </div>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="mdi mdi-account-outline"></i>
+                                <span>Profil</span>
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <!-- item-->
+                            <a href="@Url.Action("logout", "logout")" class="dropdown-item notify-item">
+                                <i class="mdi mdi-logout-variant"></i>
+                                <span>Çıkış Yap</span>
+                            </a>
+
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="/Home/Index" class="logo text-center logo-light">
+                        <span class="logo-lg">
+                            <h2 class="text-white mt-3">ClebWeb</h2>
+                            <!-- <span class="logo-lg-text-dark">Uplon</span> -->
+                        </span>
+                        <span class="logo-sm">
+                            <!-- <span class="logo-lg-text-dark">U</span> -->
+                            <h2 class="text-white mt-3">ClebWeb</h2>
+                        </span>
+                    </a>
+                </div>
+            </div> <!-- end container-fluid-->
+        </div>
+        <!-- end Topbar -->
+
+        <div class="topbar-menu">
+            <div class="container-fluid">
+                <div id="navigation">
+                    <!-- Navigation Menu-->
+                    <ul class="navigation-menu">
+
+                        <li class="has-submenu">
+                            <a href="/Home/">
+                                <i class="mdi mdi-view-dashboard"></i>Anasayfa
+                            </a>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-account"></i>Cari Hesap işlemleri <div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Cariler">Cariler</a></li>
+                                <li><a href="/Cariler/Cariekle">Cari ekle</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-truck"></i>Araç işlemleri<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Araclar">Araçlar</a></li>
+                                <li><a href="/Araclar/Aracekle">Araç ekle</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-truck-delivery"></i>Sefer işlemleri<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Seferler">Seferler</a></li>
+                                <li><a href="/Seferler/Seferekle">Sefer ekle</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-gas-station"></i>Yakıt Alımı İşlemleri<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Yakıt">Yakıtlar</a></li>
+                                <li><a href="/Yakıt/Yakıtekle">Yakıt alımı ekle</a></li>
+                                <li><a href="/DepoYakıt">Depodan Yakıt Çıkışları</a></li>
+                                <li><a href="/DepoYakıt/Yakıtekle">Depodan Yakıt Çıkışı</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-fuel"></i>Yakıt Deposu işlemleri<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/YakıtDepo">Yakıt Depoları</a></li>
+                                <li><a href="/YakıtDepo/DepoEkle">Yakıt Deposu ekle</a></li>
+                                <li><a href="/DepoyaYakit/Index">Depoya Yakıt Girişleri</a></li>
+                                <li><a href="/DepoyaYakit/Yakıtekle">Depoya Yakıt Girişi </a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-cash-register"></i>Kasa işlemleri<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Kasa">Kasa</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-chart-line"></i>Rapolar<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/CariHareket">Cari Hareketleri</a></li>
+                                <li><a href="/AracHareket">Araç Hareketleri</a></li>
+                                <li><a href="/KasaHareket">Kasa Hareketleri</a></li>
+                                <li><a href="/Rapor/Borclular">Borçlular</a></li>
+                                <li><a href="/Rapor/Alacaklılar">Alacaklılar</a></li>
+                                <li><a href="/Rapor/GünlükKasaHareketleri">Günlük Kasa Hareketleri</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> <i class="mdi mdi-cogs"></i>Yönetim<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li><a href="/Admin">Admin İşlemleri</a></li>
+                                <li><a href="/Gelir">Gelir Ekle</a></li>
+                                <li><a href="/Gider">Gider Ekle</a></li>
+                                <li><a href="/AracTipi">Araç Tipi İşlemleri</a></li>
+                                <li><a href="/AracGrup">Araç Grubu İşlemleri</a></li>
+                                <li><a href="/Guzergah">Güzergah İşlemleri</a></li>
+                                <li><a href="/CariGrup">Cari Grup İşlemleri</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <!-- End navigation menu -->
+
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end #navigation -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end navbar-custom -->
+
+    </header>
+    <!-- End Navigation Bar-->
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="wrapper">
+        @RenderBody()
+    </div> <!-- end container-fluid -->
+    <!-- end wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+    <!-- Modal -->
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2023 &copy; <a href="https://clebweb.com">ClebWeb</a> Yazılım
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end Footer -->
+    <!-- Main js -->
+    <script src="~/web/assets/js/main.js"></script>
+    <!-- Vendor js -->
+    <script src="~/web/assets/js/vendor.min.js"></script>
+
+    <!-- Modal-Effect -->
+    <script src="~/web/assets/libs/custombox/custombox.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/web/assets/js/app.min.js"></script>
+    <script src="~/web/assets/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="~/web/assets/libs/pdfmake/vfs_fonts.js"></script>
+    <script src="~/web/assets/libs/jszip/jszip.min.js"></script>
+    <!-- Datatable plugin js -->
+    <script src="~/web/assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/web/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Plugins Js -->
+    <script src="~/web/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="~/web/assets/libs/switchery/switchery.min.js"></script>
+    <script src="~/web/assets/libs/multiselect/jquery.multi-select.js"></script>
+    <script src="~/web/assets/libs/jquery-quicksearch/jquery.quicksearch.min.js"></script>
+    <script src="~/web/assets/libs/select2/select2.min.js"></script>
+    <script src="~/web/assets/libs/jquery-mockjax/jquery.mockjax.min.js"></script>
+    <script src="~/web/assets/libs/autocomplete/jquery.autocomplete.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/web/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/web/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+
+    <script src="~/web/assets/libs/datatables/buttons.html5.min.js"></script>
+    <script src="~/web/assets/libs/datatables/buttons.print.min.js"></script>
+    <!-- form advanced init -->
+    <script src="~/web/assets/js/pages/form-advanced.init.js"></script>
+
+    <!-- Datatables init -->
+    <script src="~/web/assets/js/pages/datatables.init.js"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="~/web/assets/js/pages/sweet-alerts.init.js"></script>
+
+
+
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        // Bu kısmı sadece "Demo hesabında güncelleme yapılamaz." mesajını göstermek istediğiniz yerde kullanın
+        var errorMessage = '@TempData["ErrorMessage"]';
+        if (errorMessage !== '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: errorMessage,
+                confirmButtonText: 'Tamam'
+            });
+        }
+    });
+    </script>
+</body>
+</html>
