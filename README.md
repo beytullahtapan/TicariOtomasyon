@@ -3,7 +3,7 @@
 
 ## Demo
 
--  [Demo Adresi](demo.beytullahtapan.dev/) - demo.beytullahtapan.dev
+-  [Demo Adresi](https://demo.beytullahtapan.dev) - demo.beytullahtapan.dev
 - Kullanıcı Adı: Demo - Şifre: Demo
 
 #  -Kurulum-
