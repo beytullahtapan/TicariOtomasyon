@@ -1,5 +1,5 @@
 
-## MVC Ticari otomasyon-muhasabe Uygulaması
+## MVC Ticari otomasyon-muhasabe Uygulaması .Net 5
 
 ## Demo
 
