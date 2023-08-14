@@ -132,6 +132,7 @@ $(document).ready(function () {
             $(".sefer-item[data-guzergah='" + selectedGuzergah + "']").show();
         }
     });
+
     $('#filterFaturaDurumu').on('change', function () {
         var selectedValue = $(this).val();
         filterSeferler(selectedValue, 'Fatura');
@@ -259,6 +260,12 @@ $(document).ready(function () {
             placeholder: "Seçiniz",
         });
         $("#Soforid").select2({
+            width: '100%', // Seçim kutusunun tam genişlikte başlamasını sağlar
+            dropdownAutoWidth: true, // Seçim kutusu açıldığında genişliğini otomatik olarak ayarlar
+            value: 0,
+            placeholder: "Seçiniz",
+        });
+        $("#Nakliyeci").select2({
             width: '100%', // Seçim kutusunun tam genişlikte başlamasını sağlar
             dropdownAutoWidth: true, // Seçim kutusu açıldığında genişliğini otomatik olarak ayarlar
             value: 0,

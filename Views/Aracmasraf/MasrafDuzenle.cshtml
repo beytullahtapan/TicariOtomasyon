@@ -39,15 +39,6 @@
                                         <option value="@item.Value" @(item.Value == Model.Aracid.ToString() ? "selected" : "")>@item.Text</option>
                                     }
                                 </select>
-
-                                <label for="Seferid">Sefer Kodu</label>
-                                <select name="expenses[0].Seferid" id="Seferid" class="form-control">
-                                    <option value="">-- Seçiniz --</option>
-                                    @foreach (var item in ViewBag.dgr1)
-                                    {
-                                        <option value="@item.Value" @(item.Value == Model.Seferid.ToString() ? "selected" : "")>@item.Text</option>
-                                    }
-                                </select>
                                 <input type="hidden" name="expenses[0].Aracmasrafid" id="Aracmasrafid" value="@Model.Aracmasrafid" />
                                 <table class="table table-bordered mt-2" id="expenseTable">
                                     <thead>

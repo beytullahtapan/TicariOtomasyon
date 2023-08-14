@@ -44,7 +44,7 @@
                     @Html.Label("Cari Vergi Dairesi")
                     @Html.TextBoxFor(x => x.CariVergiDairesi, new { @class = "form-control" })
                     @Html.Label("Cari TCK/VKN")
-                    @Html.TextBoxFor(x => x.CariTckVKN, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.CariTckVKN, new { @class = "form-control", type = "text" })
                     <div id="errorDiv" class="alert alert-danger mt-1" style="display:none"></div>
                     @Html.Label("Cari Grubu")
                     @Html.DropDownListFor(x => x.CariGrupid, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })

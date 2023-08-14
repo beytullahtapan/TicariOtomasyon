@@ -33,7 +33,7 @@
                             @Html.Label("Şoför Seçimi")
                             @Html.DropDownList("Soforid", ViewBag.dgr3 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "soforSelect" })
                             @Html.Label("Nakliyeci")
-                            @Html.DropDownList("Nakliyeciid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control" })
+                            @Html.DropDownList("Nakliyeciid", ViewBag.dgr5 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", id = "Nakliyeci" })
                             @Html.Label("Güzergah")
                             @Html.DropDownList("Güzergahid", ViewBag.dgr6 as List<SelectListItem>, "-- Seçiniz --", new { @class = "form-control", })
                             @Html.Label("Sefer Kodu")
@@ -46,7 +46,7 @@
                             @Html.CheckBox("Faturadurum", new { data_plugin = "switchery", data_color = "#039cfd", @class = "form-control" })
                             <br />
                             @Html.Label("İrasilye Numarası")
-                            @Html.TextBoxFor(x => x.İrsaliyeNo, new { @class = "form-control" })
+                            @Html.TextBoxFor(x => x.Irsaliyeno, new { @class = "form-control" })
                             @Html.Label("Tonaj")
                             @Html.TextBoxFor(x => x.tonaj, new { @class = "form-control", id = "Tonaj" })
                             @Html.Label("Birim Fiyat")
@@ -107,22 +107,12 @@
             // Zorunlu alanların değerlerini kontrol etme
             var aracId = $("#Aracid").val();
             var soforId = $("#soforSelect").val();
-            var nakliyeciId = $("#Nakliyeciid").val();
-            var guzergahId = $("#Güzergahid").val();
-            var seferNo = $("#Seferno").val();
-            var faturaNo = $("#FaturaNo").val();
-            var irsaliyeNo = $("#İrsaliyeNo").val();
-            var tonaj = $("#tonaj").val();
-            var komisyon = $("#Komisyon").val();
-            var kargotakipNo = $("#Kargotakipno").val();
             var cariId = $("#Cariid").val();
             var kasaId = $("#Kasaid").val();
             var alinanTutar = $("#Alinantutar").val();
-            var yuklemeYeri = $("#Yüklemeyeri").val();
-            var bosaltmaYeri = $("#Bosaltmayeri").val();
             var navlunBedel = $("#NavlunBedel").val();
 
-            if (aracId === "" || soforId === "" || nakliyeciId === "" || guzergahId === "" || seferNo === "" || faturaNo === "" || irsaliyeNo === "" || tonaj === "" || komisyon === "" || kargotakipNo === "" || cariId === "" || kasaId === "" || alinanTutar === "" || yuklemeYeri === "" || bosaltmaYeri === "" || navlunBedel === "") {
+            if (aracId === "" || soforId === "" || nakliyeciId === "" || cariId === "" || kasaId === "" || alinanTutar === "" || navlunBedel === "" ) {
                 // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
                 Swal.fire({
                     title: 'Hata!',
