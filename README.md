@@ -6,9 +6,9 @@
 -  [Demo Adresi](https://demo.beytullahtapan.dev) - demo.beytullahtapan.dev
 - Kullanıcı Adı: Demo - Şifre: Demo
 
--API uygulaması-
+-API uygulamasına-
 
--  [Repo](https://github.com/beytullahtapan/TicariOtomasyonAPI)
+-  [Buradan Ulaşabilirsiniz.](https://github.com/beytullahtapan/TicariOtomasyonAPI)
 
 #  -Kurulum-
 
