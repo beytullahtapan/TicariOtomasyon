@@ -109,10 +109,10 @@
             var soforId = $("#soforSelect").val();
             var cariId = $("#Cariid").val();
             var kasaId = $("#Kasaid").val();
-            var alinanTutar = $("#Alinantutar").val();
             var navlunBedel = $("#NavlunBedel").val();
+            var Guzergah = $("#Guzergah").val();
 
-            if (aracId === "" || soforId === "" || nakliyeciId === "" || cariId === "" || kasaId === "" || alinanTutar === "" || navlunBedel === "" ) {
+            if (aracId === "" || soforId === "" || cariId === "" || kasaId === "" || navlunBedel === "" || Guzergah === "") {
                 // Zorunlu alanların boş olduğu durumda SweetAlert ile uyarı gösterme
                 Swal.fire({
                     title: 'Hata!',
